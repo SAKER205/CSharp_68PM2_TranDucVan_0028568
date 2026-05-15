@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace QLySinhVien
+namespace quanly
 {
     internal static class Program
     {
@@ -16,7 +16,7 @@ namespace QLySinhVien
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new QLSV());
+            Application.Run(new Form1());
         }
     }
 }
