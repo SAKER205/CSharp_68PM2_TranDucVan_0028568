@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace QLySinhVien
 {
-    public partial class login : Form
+    public partial class dangnhap : Form
     {
-        public login()
+        public dangnhap()
         {
             InitializeComponent();
         }

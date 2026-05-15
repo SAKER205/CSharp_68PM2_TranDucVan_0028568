@@ -16,7 +16,7 @@ namespace QLySinhVien
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new QLSV());
+            Application.Run(new dangnhap());
         }
     }
 }

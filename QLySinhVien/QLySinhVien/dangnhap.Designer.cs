@@ -1,6 +1,6 @@
 ﻿namespace QLySinhVien
 {
-    partial class login
+    partial class dangnhap
     {
         /// <summary>
         /// Required designer variable.
