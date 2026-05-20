@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace QLySinhVien
 {
-    public partial class QLSV : Form
+    public partial class UCQLSV : UserControl
     {
-        public QLSV()
+        public UCQLSV()
         {
             InitializeComponent();
         }
