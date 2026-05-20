@@ -40,11 +40,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(122, 77);
+            this.label1.Location = new System.Drawing.Point(124, 80);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(537, 39);
+            this.label1.Size = new System.Drawing.Size(546, 39);
             this.label1.TabIndex = 0;
-            this.label1.Text = "HỆ THỐNG QUẢN LÝ SINH VIÊN";
+            this.label1.Text = "HỆ THỐNG QUẢN LÝ SINH VIÊN ";
             // 
             // label2
             // 
@@ -90,7 +90,7 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Form1
+            // dangnhap
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -101,7 +101,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
+            this.Name = "dangnhap";
             this.Text = "Đăng nhập";
             this.ResumeLayout(false);
             this.PerformLayout();
