@@ -61,8 +61,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn_update = new System.Windows.Forms.Button();
+            this.btn_add = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_DSSV)).BeginInit();
             this.SuspendLayout();
@@ -386,28 +386,29 @@
             this.button3.Text = "Xóa";
             this.button3.UseVisualStyleBackColor = false;
             // 
-            // button2
+            // btn_update
             // 
-            this.button2.BackColor = System.Drawing.Color.SeaGreen;
-            this.button2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button2.Location = new System.Drawing.Point(210, 459);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(172, 62);
-            this.button2.TabIndex = 26;
-            this.button2.Text = "Sửa";
-            this.button2.UseVisualStyleBackColor = false;
+            this.btn_update.BackColor = System.Drawing.Color.SeaGreen;
+            this.btn_update.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btn_update.Location = new System.Drawing.Point(210, 459);
+            this.btn_update.Name = "btn_update";
+            this.btn_update.Size = new System.Drawing.Size(172, 62);
+            this.btn_update.TabIndex = 26;
+            this.btn_update.Text = "Sửa";
+            this.btn_update.UseVisualStyleBackColor = false;
+            this.btn_update.Click += new System.EventHandler(this.btn_update_Click);
             // 
-            // button1
+            // btn_add
             // 
-            this.button1.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.button1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button1.Location = new System.Drawing.Point(12, 459);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(177, 62);
-            this.button1.TabIndex = 25;
-            this.button1.Text = "Thêm";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btn_add.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btn_add.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btn_add.Location = new System.Drawing.Point(12, 459);
+            this.btn_add.Name = "btn_add";
+            this.btn_add.Size = new System.Drawing.Size(177, 62);
+            this.btn_add.TabIndex = 25;
+            this.btn_add.Text = "Thêm";
+            this.btn_add.UseVisualStyleBackColor = false;
+            this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
             // 
             // UCQLSV
             // 
@@ -431,8 +432,8 @@
             this.Controls.Add(this.label7);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btn_update);
+            this.Controls.Add(this.btn_add);
             this.Name = "UCQLSV";
             this.Size = new System.Drawing.Size(1249, 680);
             this.Load += new System.EventHandler(this.UCQLSV_Load);
@@ -474,8 +475,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_update;
+        private System.Windows.Forms.Button btn_add;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn hoten;
         private System.Windows.Forms.DataGridViewTextBoxColumn gioitinh;

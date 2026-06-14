@@ -49,7 +49,7 @@ namespace QLySinhVien
             txt_lop.SelectedIndex = -1;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btn_add_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txt_msv.Text.Trim()) || string.IsNullOrEmpty(txt_hoten.Text.Trim()))
             {
@@ -127,5 +127,47 @@ namespace QLySinhVien
             }
         }
 
+        private void btn_update_Click(object sender, EventArgs e)
+        {
+            if(string.IsNullOrEmpty(txt_msv.Text.Trim()) || string.IsNullOrEmpty(txt_hoten.Text.Trim()))
+            {
+                MessageBox.Show("Vui lòng chọn sinh viên và nhập thông tin cần cập nhật!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if(txt_gioitinh.TabIndex == -1)
+            {
+                MessageBox.Show("Vui lòng chọn Giới tính!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if(txt_lop.SelectedIndex == -1) 
+            {
+                MessageBox.Show("Vui lòng chọn Lớp học!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            try
+            {
+                string msv = txt_msv.Text.Trim();
+                tbl_sinhvien sv = db.tbl_sinhviens.SingleOrDefault(x => x.id == msv);
+
+                if (sv != null)
+                {
+                    sv.hoten = txt_hoten.Text.Trim();
+                    sv.gioitinh = txt_gioitinh.SelectedItem.ToString();
+                    sv.ngaysinh = txt_ngaysinh.Value;
+                    sv.malop = txt_lop.SelectedValue.ToString();
+                    db.SubmitChanges();
+                    LoadData();
+
+                }
+                else
+                {
+                    MessageBox.Show("Không tìm thấy sinh viên với mã: " + msv, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Lỗi khi cập nhật dữ liệu: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
