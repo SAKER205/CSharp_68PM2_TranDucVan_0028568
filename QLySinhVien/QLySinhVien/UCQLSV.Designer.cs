@@ -60,7 +60,7 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btn_delete = new System.Windows.Forms.Button();
             this.btn_update = new System.Windows.Forms.Button();
             this.btn_add = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
@@ -375,16 +375,17 @@
             this.button4.Text = "Làm mới";
             this.button4.UseVisualStyleBackColor = false;
             // 
-            // button3
+            // btn_delete
             // 
-            this.button3.BackColor = System.Drawing.Color.Red;
-            this.button3.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button3.Location = new System.Drawing.Point(12, 527);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(177, 56);
-            this.button3.TabIndex = 27;
-            this.button3.Text = "Xóa";
-            this.button3.UseVisualStyleBackColor = false;
+            this.btn_delete.BackColor = System.Drawing.Color.Red;
+            this.btn_delete.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btn_delete.Location = new System.Drawing.Point(12, 527);
+            this.btn_delete.Name = "btn_delete";
+            this.btn_delete.Size = new System.Drawing.Size(177, 56);
+            this.btn_delete.TabIndex = 27;
+            this.btn_delete.Text = "Xóa";
+            this.btn_delete.UseVisualStyleBackColor = false;
+            this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
             // 
             // btn_update
             // 
@@ -431,7 +432,7 @@
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.btn_delete);
             this.Controls.Add(this.btn_update);
             this.Controls.Add(this.btn_add);
             this.Name = "UCQLSV";
@@ -474,7 +475,7 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btn_delete;
         private System.Windows.Forms.Button btn_update;
         private System.Windows.Forms.Button btn_add;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;

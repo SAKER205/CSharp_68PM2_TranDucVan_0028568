@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -81,6 +82,13 @@ namespace QLySinhVien
                 db.tbl_sinhviens.InsertOnSubmit(sv);
                 db.SubmitChanges();
                 LoadData();
+
+                txt_msv.Text = "";
+                txt_hoten.Text = "";
+                txt_gioitinh.SelectedIndex = -1;
+                txt_lop.SelectedIndex = -1;
+                txt_ngaysinh.Value = DateTime.Now;
+                txt_msv.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -158,6 +166,13 @@ namespace QLySinhVien
                     db.SubmitChanges();
                     LoadData();
 
+                    txt_msv.Text = "";
+                    txt_hoten.Text = "";
+                    txt_gioitinh.SelectedIndex = -1;
+                    txt_lop.SelectedIndex = -1;
+                    txt_ngaysinh.Value = DateTime.Now;
+                    txt_msv.Enabled = true;
+
                 }
                 else
                 {
@@ -167,6 +182,50 @@ namespace QLySinhVien
             catch(Exception ex)
             {
                 MessageBox.Show("Lỗi khi cập nhật dữ liệu: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btn_delete_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txt_msv.Text.Trim()))
+            {
+                MessageBox.Show("Vui lòng chọn sinh viên cần xóa từ danh sách!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult dr = MessageBox.Show("Bạn có chắc chắn muốn xóa sinh viên này không?", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dr == DialogResult.Yes)
+            {
+                try
+                {
+                    string maSV = txt_msv.Text.Trim();
+                    tbl_sinhvien sv = db.tbl_sinhviens.SingleOrDefault(x => x.id == maSV);
+
+                    if (sv != null)
+                    {
+                        db.tbl_sinhviens.DeleteOnSubmit(sv);
+                        db.SubmitChanges();
+
+                        LoadData();
+
+                        txt_msv.Text = "";
+                        txt_hoten.Text = "";
+                        txt_gioitinh.SelectedIndex = -1;
+                        txt_lop.SelectedIndex = -1;
+                        txt_ngaysinh.Value = DateTime.Now;
+                        txt_msv.Enabled = true;
+
+                        MessageBox.Show("Xóa sinh viên thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Không tìm thấy sinh viên cần xóa!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi khi xóa dữ liệu: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
     }
