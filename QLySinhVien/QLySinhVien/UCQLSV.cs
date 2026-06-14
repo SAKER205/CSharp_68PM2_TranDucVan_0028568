@@ -14,6 +14,9 @@ namespace QLySinhVien
     public partial class UCQLSV : UserControl
     {
         DataBaseDataContext db = new DataBaseDataContext();
+        int pageNumber = 1;
+        int pageSize = 3;
+        int totalPages = 1;
 
         public UCQLSV()
         {
@@ -29,8 +32,29 @@ namespace QLySinhVien
 
         public void LoadData()
         {
-            List<tbl_sinhvien> dSSV = db.tbl_sinhviens.ToList();
+            string keyword = txt_search.Text.Trim().ToLower();
+
+            var query = db.tbl_sinhviens.AsQueryable();
+
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                query = query.Where(x => x.id.ToLower().Contains(keyword) ||
+                                         x.hoten.ToLower().Contains(keyword) ||
+                                         x.tbl_lophoc.tenlop.ToLower().Contains(keyword));
+            }
+
+            int totalRecords = query.Count();
+            totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
+            if (totalPages < 1) totalPages = 1;
+            if (pageNumber < 1) pageNumber = 1;
+            if (pageNumber > totalPages) pageNumber = totalPages;
+
+            List<tbl_sinhvien> dSSV = query.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
             dgv_DSSV.DataSource = dSSV;
+
+            page_Number.Text = pageNumber.ToString();
+            total_Page.Text = totalPages.ToString();
+            total_Records.Text = totalRecords.ToString();
         }
 
         public void LoadComboBoxGioiTinh()
@@ -81,6 +105,10 @@ namespace QLySinhVien
 
                 db.tbl_sinhviens.InsertOnSubmit(sv);
                 db.SubmitChanges();
+
+                int totalRecords = db.tbl_sinhviens.Count();
+                pageNumber = (int)Math.Ceiling((double)totalRecords / pageSize);
+
                 LoadData();
 
                 txt_msv.Text = "";
@@ -137,17 +165,17 @@ namespace QLySinhVien
 
         private void btn_update_Click(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(txt_msv.Text.Trim()) || string.IsNullOrEmpty(txt_hoten.Text.Trim()))
+            if (string.IsNullOrEmpty(txt_msv.Text.Trim()) || string.IsNullOrEmpty(txt_hoten.Text.Trim()))
             {
                 MessageBox.Show("Vui lòng chọn sinh viên và nhập thông tin cần cập nhật!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if(txt_gioitinh.TabIndex == -1)
+            if (txt_gioitinh.SelectedIndex == -1)
             {
                 MessageBox.Show("Vui lòng chọn Giới tính!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if(txt_lop.SelectedIndex == -1) 
+            if (txt_lop.SelectedIndex == -1)
             {
                 MessageBox.Show("Vui lòng chọn Lớp học!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -172,14 +200,13 @@ namespace QLySinhVien
                     txt_lop.SelectedIndex = -1;
                     txt_ngaysinh.Value = DateTime.Now;
                     txt_msv.Enabled = true;
-
                 }
                 else
                 {
                     MessageBox.Show("Không tìm thấy sinh viên với mã: " + msv, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Lỗi khi cập nhật dữ liệu: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -206,6 +233,11 @@ namespace QLySinhVien
                         db.tbl_sinhviens.DeleteOnSubmit(sv);
                         db.SubmitChanges();
 
+                        string keyword = txt_search.Text.Trim().ToLower();
+                        int totalRecords = db.tbl_sinhviens.Count(x => x.id.ToLower().Contains(keyword) || x.hoten.ToLower().Contains(keyword));
+                        totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
+                        if (pageNumber > totalPages) pageNumber = totalPages;
+
                         LoadData();
 
                         txt_msv.Text = "";
@@ -227,6 +259,52 @@ namespace QLySinhVien
                     MessageBox.Show("Lỗi khi xóa dữ liệu: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void btn_First_Click(object sender, EventArgs e)
+        {
+            pageNumber = 1;
+            LoadData();
+        }
+
+        private void btn_Prev_Click(object sender, EventArgs e)
+        {
+            if (pageNumber > 1)
+            {
+                pageNumber--;
+                LoadData();
+            }
+        }
+
+        private void btn_Next_Click(object sender, EventArgs e)
+        {
+            if (pageNumber < totalPages)
+            {
+                pageNumber++;
+                LoadData();
+            }
+        }
+
+        private void btn_Last_Click(object sender, EventArgs e)
+        {
+            pageNumber = totalPages;
+            LoadData();
+        }
+
+        private void btn_search_Click(object sender, EventArgs e)
+        {
+            pageNumber = 1;
+            LoadData();
+        }
+
+        private void btn_clear_Click(object sender, EventArgs e)
+        {
+            txt_msv.Text = "";
+            txt_hoten.Text = "";
+            txt_gioitinh.SelectedIndex = -1;
+            txt_lop.SelectedIndex = -1;
+            txt_ngaysinh.Value = DateTime.Now;
+            txt_msv.Enabled = true;
         }
     }
 }

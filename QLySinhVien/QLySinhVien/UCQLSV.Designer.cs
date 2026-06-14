@@ -56,10 +56,10 @@
             this.gioitinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ngaysinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.malop = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button5 = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.btn_search = new System.Windows.Forms.Button();
+            this.txt_search = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btn_clear = new System.Windows.Forms.Button();
             this.btn_delete = new System.Windows.Forms.Button();
             this.btn_update = new System.Windows.Forms.Button();
             this.btn_add = new System.Windows.Forms.Button();
@@ -246,6 +246,7 @@
             this.btn_Last.TabIndex = 37;
             this.btn_Last.Text = ">>";
             this.btn_Last.UseVisualStyleBackColor = true;
+            this.btn_Last.Click += new System.EventHandler(this.btn_Last_Click);
             // 
             // btn_Next
             // 
@@ -255,6 +256,7 @@
             this.btn_Next.TabIndex = 36;
             this.btn_Next.Text = ">";
             this.btn_Next.UseVisualStyleBackColor = true;
+            this.btn_Next.Click += new System.EventHandler(this.btn_Next_Click);
             // 
             // btn_Prev
             // 
@@ -264,6 +266,7 @@
             this.btn_Prev.TabIndex = 35;
             this.btn_Prev.Text = "<";
             this.btn_Prev.UseVisualStyleBackColor = true;
+            this.btn_Prev.Click += new System.EventHandler(this.btn_Prev_Click);
             // 
             // btn_First
             // 
@@ -273,6 +276,7 @@
             this.btn_First.TabIndex = 33;
             this.btn_First.Text = "<<";
             this.btn_First.UseVisualStyleBackColor = true;
+            this.btn_First.Click += new System.EventHandler(this.btn_First_Click);
             // 
             // dgv_DSSV
             // 
@@ -336,23 +340,24 @@
             this.malop.Name = "malop";
             this.malop.Width = 125;
             // 
-            // button5
+            // btn_search
             // 
-            this.button5.BackColor = System.Drawing.Color.Navy;
-            this.button5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button5.Location = new System.Drawing.Point(715, 17);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(122, 45);
-            this.button5.TabIndex = 31;
-            this.button5.Text = "Tìm";
-            this.button5.UseVisualStyleBackColor = false;
+            this.btn_search.BackColor = System.Drawing.Color.Navy;
+            this.btn_search.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_search.Location = new System.Drawing.Point(715, 17);
+            this.btn_search.Name = "btn_search";
+            this.btn_search.Size = new System.Drawing.Size(122, 45);
+            this.btn_search.TabIndex = 31;
+            this.btn_search.Text = "Tìm";
+            this.btn_search.UseVisualStyleBackColor = false;
+            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
             // 
-            // textBox3
+            // txt_search
             // 
-            this.textBox3.Location = new System.Drawing.Point(409, 41);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(284, 22);
-            this.textBox3.TabIndex = 30;
+            this.txt_search.Location = new System.Drawing.Point(409, 41);
+            this.txt_search.Name = "txt_search";
+            this.txt_search.Size = new System.Drawing.Size(284, 22);
+            this.txt_search.TabIndex = 30;
             // 
             // label7
             // 
@@ -364,16 +369,17 @@
             this.label7.TabIndex = 29;
             this.label7.Text = "Tìm kiếm (Tên/Mã SV/Lớp):";
             // 
-            // button4
+            // btn_clear
             // 
-            this.button4.BackColor = System.Drawing.SystemColors.GrayText;
-            this.button4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button4.Location = new System.Drawing.Point(210, 527);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(172, 56);
-            this.button4.TabIndex = 28;
-            this.button4.Text = "Làm mới";
-            this.button4.UseVisualStyleBackColor = false;
+            this.btn_clear.BackColor = System.Drawing.SystemColors.GrayText;
+            this.btn_clear.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btn_clear.Location = new System.Drawing.Point(210, 527);
+            this.btn_clear.Name = "btn_clear";
+            this.btn_clear.Size = new System.Drawing.Size(172, 56);
+            this.btn_clear.TabIndex = 28;
+            this.btn_clear.Text = "Làm mới";
+            this.btn_clear.UseVisualStyleBackColor = false;
+            this.btn_clear.Click += new System.EventHandler(this.btn_clear_Click);
             // 
             // btn_delete
             // 
@@ -428,10 +434,10 @@
             this.Controls.Add(this.btn_Prev);
             this.Controls.Add(this.btn_First);
             this.Controls.Add(this.dgv_DSSV);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.btn_search);
+            this.Controls.Add(this.txt_search);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.btn_clear);
             this.Controls.Add(this.btn_delete);
             this.Controls.Add(this.btn_update);
             this.Controls.Add(this.btn_add);
@@ -471,10 +477,10 @@
         private System.Windows.Forms.Button btn_Prev;
         private System.Windows.Forms.Button btn_First;
         private System.Windows.Forms.DataGridView dgv_DSSV;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Button btn_search;
+        private System.Windows.Forms.TextBox txt_search;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btn_clear;
         private System.Windows.Forms.Button btn_delete;
         private System.Windows.Forms.Button btn_update;
         private System.Windows.Forms.Button btn_add;
