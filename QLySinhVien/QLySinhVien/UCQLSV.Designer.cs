@@ -39,18 +39,23 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txt_msv = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
+            this.total_Records = new System.Windows.Forms.Label();
+            this.total_Page = new System.Windows.Forms.Label();
+            this.page_Number = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.btn_Last = new System.Windows.Forms.Button();
+            this.btn_Next = new System.Windows.Forms.Button();
+            this.btn_Prev = new System.Windows.Forms.Button();
+            this.btn_First = new System.Windows.Forms.Button();
             this.dgv_DSSV = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hoten = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gioitinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ngaysinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.malop = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button5 = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -58,11 +63,6 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hoten = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gioitinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ngaysinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.malop = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_DSSV)).BeginInit();
             this.SuspendLayout();
@@ -173,32 +173,32 @@
             this.label3.TabIndex = 12;
             this.label3.Text = "Họ và tên:";
             // 
-            // label14
+            // total_Records
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(669, 635);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(14, 16);
-            this.label14.TabIndex = 44;
-            this.label14.Text = "3";
+            this.total_Records.AutoSize = true;
+            this.total_Records.Location = new System.Drawing.Point(669, 635);
+            this.total_Records.Name = "total_Records";
+            this.total_Records.Size = new System.Drawing.Size(14, 16);
+            this.total_Records.TabIndex = 44;
+            this.total_Records.Text = "3";
             // 
-            // label13
+            // total_Page
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(638, 635);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(14, 16);
-            this.label13.TabIndex = 43;
-            this.label13.Text = "1";
+            this.total_Page.AutoSize = true;
+            this.total_Page.Location = new System.Drawing.Point(638, 635);
+            this.total_Page.Name = "total_Page";
+            this.total_Page.Size = new System.Drawing.Size(14, 16);
+            this.total_Page.TabIndex = 43;
+            this.total_Page.Text = "1";
             // 
-            // label12
+            // page_Number
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(614, 635);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(14, 16);
-            this.label12.TabIndex = 42;
-            this.label12.Text = "1";
+            this.page_Number.AutoSize = true;
+            this.page_Number.Location = new System.Drawing.Point(614, 635);
+            this.page_Number.Name = "page_Number";
+            this.page_Number.Size = new System.Drawing.Size(14, 16);
+            this.page_Number.TabIndex = 42;
+            this.page_Number.Text = "1";
             // 
             // label11
             // 
@@ -238,41 +238,41 @@
             this.label8.TabIndex = 38;
             this.label8.Text = "Trang";
             // 
-            // button9
+            // btn_Last
             // 
-            this.button9.Location = new System.Drawing.Point(849, 610);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(66, 57);
-            this.button9.TabIndex = 37;
-            this.button9.Text = ">>";
-            this.button9.UseVisualStyleBackColor = true;
+            this.btn_Last.Location = new System.Drawing.Point(849, 610);
+            this.btn_Last.Name = "btn_Last";
+            this.btn_Last.Size = new System.Drawing.Size(66, 57);
+            this.btn_Last.TabIndex = 37;
+            this.btn_Last.Text = ">>";
+            this.btn_Last.UseVisualStyleBackColor = true;
             // 
-            // button8
+            // btn_Next
             // 
-            this.button8.Location = new System.Drawing.Point(781, 610);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(64, 57);
-            this.button8.TabIndex = 36;
-            this.button8.Text = ">";
-            this.button8.UseVisualStyleBackColor = true;
+            this.btn_Next.Location = new System.Drawing.Point(781, 610);
+            this.btn_Next.Name = "btn_Next";
+            this.btn_Next.Size = new System.Drawing.Size(64, 57);
+            this.btn_Next.TabIndex = 36;
+            this.btn_Next.Text = ">";
+            this.btn_Next.UseVisualStyleBackColor = true;
             // 
-            // button7
+            // btn_Prev
             // 
-            this.button7.Location = new System.Drawing.Point(481, 608);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(62, 57);
-            this.button7.TabIndex = 35;
-            this.button7.Text = "<";
-            this.button7.UseVisualStyleBackColor = true;
+            this.btn_Prev.Location = new System.Drawing.Point(481, 608);
+            this.btn_Prev.Name = "btn_Prev";
+            this.btn_Prev.Size = new System.Drawing.Size(62, 57);
+            this.btn_Prev.TabIndex = 35;
+            this.btn_Prev.Text = "<";
+            this.btn_Prev.UseVisualStyleBackColor = true;
             // 
-            // button6
+            // btn_First
             // 
-            this.button6.Location = new System.Drawing.Point(409, 608);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(66, 57);
-            this.button6.TabIndex = 33;
-            this.button6.Text = "<<";
-            this.button6.UseVisualStyleBackColor = true;
+            this.btn_First.Location = new System.Drawing.Point(409, 608);
+            this.btn_First.Name = "btn_First";
+            this.btn_First.Size = new System.Drawing.Size(66, 57);
+            this.btn_First.TabIndex = 33;
+            this.btn_First.Text = "<<";
+            this.btn_First.UseVisualStyleBackColor = true;
             // 
             // dgv_DSSV
             // 
@@ -294,6 +294,47 @@
             this.dgv_DSSV.RowTemplate.Height = 24;
             this.dgv_DSSV.Size = new System.Drawing.Size(819, 512);
             this.dgv_DSSV.TabIndex = 32;
+            this.dgv_DSSV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_DSSV_CellClick);
+            // 
+            // id
+            // 
+            this.id.DataPropertyName = "id";
+            this.id.HeaderText = "Mã SV";
+            this.id.MinimumWidth = 6;
+            this.id.Name = "id";
+            this.id.Width = 125;
+            // 
+            // hoten
+            // 
+            this.hoten.DataPropertyName = "hoten";
+            this.hoten.HeaderText = "Họ và Tên";
+            this.hoten.MinimumWidth = 6;
+            this.hoten.Name = "hoten";
+            this.hoten.Width = 125;
+            // 
+            // gioitinh
+            // 
+            this.gioitinh.DataPropertyName = "gioitinh";
+            this.gioitinh.HeaderText = "Giới Tính";
+            this.gioitinh.MinimumWidth = 6;
+            this.gioitinh.Name = "gioitinh";
+            this.gioitinh.Width = 125;
+            // 
+            // ngaysinh
+            // 
+            this.ngaysinh.DataPropertyName = "ngaysinh";
+            this.ngaysinh.HeaderText = "Ngày Sinh";
+            this.ngaysinh.MinimumWidth = 6;
+            this.ngaysinh.Name = "ngaysinh";
+            this.ngaysinh.Width = 125;
+            // 
+            // malop
+            // 
+            this.malop.DataPropertyName = "malop";
+            this.malop.HeaderText = "Lớp";
+            this.malop.MinimumWidth = 6;
+            this.malop.Name = "malop";
+            this.malop.Width = 125;
             // 
             // button5
             // 
@@ -368,62 +409,22 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // id
-            // 
-            this.id.DataPropertyName = "id";
-            this.id.HeaderText = "Mã SV";
-            this.id.MinimumWidth = 6;
-            this.id.Name = "id";
-            this.id.Width = 125;
-            // 
-            // hoten
-            // 
-            this.hoten.DataPropertyName = "hoten";
-            this.hoten.HeaderText = "Họ và Tên";
-            this.hoten.MinimumWidth = 6;
-            this.hoten.Name = "hoten";
-            this.hoten.Width = 125;
-            // 
-            // gioitinh
-            // 
-            this.gioitinh.DataPropertyName = "gioitinh";
-            this.gioitinh.HeaderText = "Giới Tính";
-            this.gioitinh.MinimumWidth = 6;
-            this.gioitinh.Name = "gioitinh";
-            this.gioitinh.Width = 125;
-            // 
-            // ngaysinh
-            // 
-            this.ngaysinh.DataPropertyName = "ngaysinh";
-            this.ngaysinh.HeaderText = "Ngày Sinh";
-            this.ngaysinh.MinimumWidth = 6;
-            this.ngaysinh.Name = "ngaysinh";
-            this.ngaysinh.Width = 125;
-            // 
-            // malop
-            // 
-            this.malop.DataPropertyName = "malop";
-            this.malop.HeaderText = "Lớp";
-            this.malop.MinimumWidth = 6;
-            this.malop.Name = "malop";
-            this.malop.Width = 125;
-            // 
             // UCQLSV
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.label14);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.label12);
+            this.Controls.Add(this.total_Records);
+            this.Controls.Add(this.total_Page);
+            this.Controls.Add(this.page_Number);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.button9);
-            this.Controls.Add(this.button8);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button6);
+            this.Controls.Add(this.btn_Last);
+            this.Controls.Add(this.btn_Next);
+            this.Controls.Add(this.btn_Prev);
+            this.Controls.Add(this.btn_First);
             this.Controls.Add(this.dgv_DSSV);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.textBox3);
@@ -456,17 +457,17 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txt_msv;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label total_Records;
+        private System.Windows.Forms.Label total_Page;
+        private System.Windows.Forms.Label page_Number;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button btn_Last;
+        private System.Windows.Forms.Button btn_Next;
+        private System.Windows.Forms.Button btn_Prev;
+        private System.Windows.Forms.Button btn_First;
         private System.Windows.Forms.DataGridView dgv_DSSV;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.TextBox textBox3;

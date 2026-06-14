@@ -88,6 +88,44 @@ namespace QLySinhVien
             }
         }
 
-        
+        private void dgv_DSSV_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.RowIndex < dgv_DSSV.Rows.Count)
+            {
+                DataGridViewRow row = dgv_DSSV.Rows[e.RowIndex];
+
+                txt_msv.Text = row.Cells["id"].Value?.ToString();
+                txt_hoten.Text = row.Cells["hoten"].Value?.ToString();
+
+                if (row.Cells["ngaysinh"].Value != null && DateTime.TryParse(row.Cells["ngaysinh"].Value.ToString(), out DateTime ngaySinh))
+                {
+                    txt_ngaysinh.Value = ngaySinh;
+                }
+                else
+                {
+                    txt_ngaysinh.Value = DateTime.Now;
+                }
+
+                if (row.Cells["gioitinh"].Value != null)
+                {
+                    txt_gioitinh.Text = row.Cells["gioitinh"].Value.ToString();
+                }
+                else
+                {
+                    txt_gioitinh.SelectedIndex = -1;
+                }
+
+                if (row.Cells["malop"].Value != null)
+                {
+                    txt_lop.SelectedValue = row.Cells["malop"].Value.ToString();
+                }
+                else
+                {
+                    txt_lop.SelectedIndex = -1;
+                }
+                txt_msv.Enabled = false;
+            }
+        }
+
     }
 }
