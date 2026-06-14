@@ -25,22 +25,24 @@ namespace QLySinhVien
 
         private void UCQLSV_Load(object sender, EventArgs e)
         {
-            LoadData();
-            LoadComboBoxGioiTinh();
             LoadComboBoxLop();
+            LoadComboBoxGioiTinh();
+            LoadData();
         }
 
         public void LoadData()
         {
+            db = new DataBaseDataContext();
+
             string keyword = txt_search.Text.Trim().ToLower();
 
             var query = db.tbl_sinhviens.AsQueryable();
 
             if (!string.IsNullOrEmpty(keyword))
             {
-                query = query.Where(x => x.id.ToLower().Contains(keyword) ||
-                                         x.hoten.ToLower().Contains(keyword) ||
-                                         x.tbl_lophoc.tenlop.ToLower().Contains(keyword));
+                query = query.Where(x => (x.id != null && x.id.ToLower().Contains(keyword)) ||
+                                         (x.hoten != null && x.hoten.ToLower().Contains(keyword)) ||
+                                         (x.tbl_lophoc.tenlop != null && x.tbl_lophoc.tenlop.ToLower().Contains(keyword)));
             }
 
             int totalRecords = query.Count();
@@ -49,7 +51,18 @@ namespace QLySinhVien
             if (pageNumber < 1) pageNumber = 1;
             if (pageNumber > totalPages) pageNumber = totalPages;
 
-            List<tbl_sinhvien> dSSV = query.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+            var dSSV = query.Skip((pageNumber - 1) * pageSize)
+                            .Take(pageSize)
+                            .Select(x => new {
+                                id = x.id,
+                                hoten = x.hoten,
+                                gioitinh = x.gioitinh,
+                                ngaysinh = x.ngaysinh,
+                                malop = x.tbl_lophoc.tenlop,
+                                IDLop = x.id_lop
+                            })
+                            .ToList();
+
             dgv_DSSV.DataSource = dSSV;
 
             page_Number.Text = pageNumber.ToString();
@@ -70,7 +83,7 @@ namespace QLySinhVien
             List<tbl_lophoc> dSLop = db.tbl_lophocs.ToList();
             txt_lop.DataSource = dSLop;
             txt_lop.DisplayMember = "tenlop";
-            txt_lop.ValueMember = "malop";
+            txt_lop.ValueMember = "id";
             txt_lop.SelectedIndex = -1;
         }
 
@@ -88,7 +101,7 @@ namespace QLySinhVien
                 return;
             }
 
-            if (txt_lop.SelectedIndex == -1)
+            if (txt_lop.SelectedValue == null || txt_lop.SelectedIndex == -1)
             {
                 MessageBox.Show("Vui lòng chọn Lớp học!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -101,7 +114,7 @@ namespace QLySinhVien
                 sv.hoten = txt_hoten.Text.Trim();
                 sv.gioitinh = txt_gioitinh.SelectedItem.ToString();
                 sv.ngaysinh = txt_ngaysinh.Value;
-                sv.malop = txt_lop.SelectedValue.ToString();
+                sv.id_lop = Convert.ToInt32(txt_lop.SelectedValue);
 
                 db.tbl_sinhviens.InsertOnSubmit(sv);
                 db.SubmitChanges();
@@ -110,13 +123,8 @@ namespace QLySinhVien
                 pageNumber = (int)Math.Ceiling((double)totalRecords / pageSize);
 
                 LoadData();
-
-                txt_msv.Text = "";
-                txt_hoten.Text = "";
-                txt_gioitinh.SelectedIndex = -1;
-                txt_lop.SelectedIndex = -1;
-                txt_ngaysinh.Value = DateTime.Now;
-                txt_msv.Enabled = true;
+                ClearForm();
+                MessageBox.Show("Thêm sinh viên mới thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -151,9 +159,9 @@ namespace QLySinhVien
                     txt_gioitinh.SelectedIndex = -1;
                 }
 
-                if (row.Cells["malop"].Value != null)
+                if (row.Cells["IDLop"].Value != null && int.TryParse(row.Cells["IDLop"].Value.ToString(), out int idLop))
                 {
-                    txt_lop.SelectedValue = row.Cells["malop"].Value.ToString();
+                    txt_lop.SelectedValue = idLop;
                 }
                 else
                 {
@@ -175,7 +183,7 @@ namespace QLySinhVien
                 MessageBox.Show("Vui lòng chọn Giới tính!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (txt_lop.SelectedIndex == -1)
+            if (txt_lop.SelectedValue == null || txt_lop.SelectedIndex == -1)
             {
                 MessageBox.Show("Vui lòng chọn Lớp học!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -190,16 +198,12 @@ namespace QLySinhVien
                     sv.hoten = txt_hoten.Text.Trim();
                     sv.gioitinh = txt_gioitinh.SelectedItem.ToString();
                     sv.ngaysinh = txt_ngaysinh.Value;
-                    sv.malop = txt_lop.SelectedValue.ToString();
+                    sv.id_lop = Convert.ToInt32(txt_lop.SelectedValue);
+
                     db.SubmitChanges();
                     LoadData();
-
-                    txt_msv.Text = "";
-                    txt_hoten.Text = "";
-                    txt_gioitinh.SelectedIndex = -1;
-                    txt_lop.SelectedIndex = -1;
-                    txt_ngaysinh.Value = DateTime.Now;
-                    txt_msv.Enabled = true;
+                    ClearForm();
+                    MessageBox.Show("Cập nhật thông tin sinh viên thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
@@ -239,14 +243,7 @@ namespace QLySinhVien
                         if (pageNumber > totalPages) pageNumber = totalPages;
 
                         LoadData();
-
-                        txt_msv.Text = "";
-                        txt_hoten.Text = "";
-                        txt_gioitinh.SelectedIndex = -1;
-                        txt_lop.SelectedIndex = -1;
-                        txt_ngaysinh.Value = DateTime.Now;
-                        txt_msv.Enabled = true;
-
+                        ClearForm();
                         MessageBox.Show("Xóa sinh viên thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
@@ -298,6 +295,11 @@ namespace QLySinhVien
         }
 
         private void btn_clear_Click(object sender, EventArgs e)
+        {
+            ClearForm();
+        }
+
+        private void ClearForm()
         {
             txt_msv.Text = "";
             txt_hoten.Text = "";
