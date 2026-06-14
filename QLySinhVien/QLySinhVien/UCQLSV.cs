@@ -64,6 +64,10 @@ namespace QLySinhVien
                             .ToList();
 
             dgv_DSSV.DataSource = dSSV;
+            if (dgv_DSSV.Columns["idlop"] != null)
+            {
+                dgv_DSSV.Columns["idlop"].Visible = false;
+            }
 
             page_Number.Text = pageNumber.ToString();
             total_Page.Text = totalPages.ToString();
