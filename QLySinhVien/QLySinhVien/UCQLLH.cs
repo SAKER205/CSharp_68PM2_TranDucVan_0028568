@@ -239,5 +239,21 @@ namespace QLySinhVien
             pageNumber = totalPages;
             LoadData();
         }
+        private void btn_viewStudents_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txt_id.Text.Trim()))
+            {
+                MessageBox.Show("Vui lòng chọn một lớp học từ danh sách trước khi xem sinh viên!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (int.TryParse(txt_id.Text.Trim(), out int idLop))
+            {
+                string tenLop = txt_tenlop.Text.Trim();
+
+                FrmDanhSachSV frm = new FrmDanhSachSV(idLop, tenLop);
+                frm.ShowDialog();
+            }
+        }
     }
 }
