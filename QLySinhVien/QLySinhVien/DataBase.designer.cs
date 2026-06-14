@@ -91,6 +91,8 @@ namespace QLySinhVien
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
+		private int _id;
+		
 		private string _malop;
 		
 		private string _tenlop;
@@ -103,6 +105,8 @@ namespace QLySinhVien
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
     partial void OnmalopChanging(string value);
     partial void OnmalopChanged();
     partial void OntenlopChanging(string value);
@@ -117,7 +121,27 @@ namespace QLySinhVien
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_malop", DbType="NVarChar(20) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_malop", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
 		public string malop
 		{
 			get
@@ -177,7 +201,7 @@ namespace QLySinhVien
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_lophoc_tbl_sinhvien", Storage="_tbl_sinhviens", ThisKey="malop", OtherKey="malop")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_lophoc_tbl_sinhvien", Storage="_tbl_sinhviens", ThisKey="id", OtherKey="id_lop")]
 		public EntitySet<tbl_sinhvien> tbl_sinhviens
 		{
 			get
@@ -237,7 +261,7 @@ namespace QLySinhVien
 		
 		private System.DateTime _ngaysinh;
 		
-		private string _malop;
+		private int _id_lop;
 		
 		private EntityRef<tbl_lophoc> _tbl_lophoc;
 		
@@ -253,8 +277,8 @@ namespace QLySinhVien
     partial void OngioitinhChanged();
     partial void OnngaysinhChanging(System.DateTime value);
     partial void OnngaysinhChanged();
-    partial void OnmalopChanging(string value);
-    partial void OnmalopChanged();
+    partial void Onid_lopChanging(int value);
+    partial void Onid_lopChanged();
     #endregion
 		
 		public tbl_sinhvien()
@@ -343,31 +367,31 @@ namespace QLySinhVien
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_malop", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
-		public string malop
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_lop", DbType="Int NOT NULL")]
+		public int id_lop
 		{
 			get
 			{
-				return this._malop;
+				return this._id_lop;
 			}
 			set
 			{
-				if ((this._malop != value))
+				if ((this._id_lop != value))
 				{
 					if (this._tbl_lophoc.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnmalopChanging(value);
+					this.Onid_lopChanging(value);
 					this.SendPropertyChanging();
-					this._malop = value;
-					this.SendPropertyChanged("malop");
-					this.OnmalopChanged();
+					this._id_lop = value;
+					this.SendPropertyChanged("id_lop");
+					this.Onid_lopChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_lophoc_tbl_sinhvien", Storage="_tbl_lophoc", ThisKey="malop", OtherKey="malop", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_lophoc_tbl_sinhvien", Storage="_tbl_lophoc", ThisKey="id_lop", OtherKey="id", IsForeignKey=true)]
 		public tbl_lophoc tbl_lophoc
 		{
 			get
@@ -390,11 +414,11 @@ namespace QLySinhVien
 					if ((value != null))
 					{
 						value.tbl_sinhviens.Add(this);
-						this._malop = value.malop;
+						this._id_lop = value.id;
 					}
 					else
 					{
-						this._malop = default(string);
+						this._id_lop = default(int);
 					}
 					this.SendPropertyChanged("tbl_lophoc");
 				}

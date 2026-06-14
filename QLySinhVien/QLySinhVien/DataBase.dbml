@@ -2,10 +2,11 @@
   <Connection Mode="AppSettings" ConnectionString="Data Source=SAKER;Initial Catalog=QuanLySV;Persist Security Info=True;User ID=sa;Trust Server Certificate=True" SettingsObjectName="QLySinhVien.Properties.Settings" SettingsPropertyName="QuanLySVConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.tbl_lophocs" Member="tbl_lophocs">
     <Type Name="tbl_lophoc">
-      <Column Name="malop" Type="System.String" DbType="NVarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="malop" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
       <Column Name="tenlop" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="ghichu" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Association Name="tbl_lophoc_tbl_sinhvien" Member="tbl_sinhviens" ThisKey="malop" OtherKey="malop" Type="tbl_sinhvien" />
+      <Association Name="tbl_lophoc_tbl_sinhvien" Member="tbl_sinhviens" ThisKey="id" OtherKey="id_lop" Type="tbl_sinhvien" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_sinhviens" Member="tbl_sinhviens">
@@ -14,8 +15,8 @@
       <Column Name="hoten" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="gioitinh" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
       <Column Name="ngaysinh" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="malop" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
-      <Association Name="tbl_lophoc_tbl_sinhvien" Member="tbl_lophoc" ThisKey="malop" OtherKey="malop" Type="tbl_lophoc" IsForeignKey="true" />
+      <Column Name="id_lop" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="tbl_lophoc_tbl_sinhvien" Member="tbl_lophoc" ThisKey="id_lop" OtherKey="id" Type="tbl_lophoc" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
